@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 public class ExampleMod
 {
     private static final Logger LOGGER = LogManager.getLogger();
+
     public ExampleMod() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
