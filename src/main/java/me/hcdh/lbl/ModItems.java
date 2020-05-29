@@ -8,6 +8,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModItems {
     public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, LittleBigLogic.MOD_ID);
 
+    public static final Item LOGIC_BOARD = register("logic_board", new Item((new Item.Properties()).group(LittleBigLogic.LBL_ITEMGROUP)));
+
     public static void registerItems(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }

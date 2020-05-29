@@ -2,6 +2,8 @@ package me.hcdh.lbl;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.item.ItemGroup;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -22,6 +24,13 @@ import java.util.stream.Collectors;
 public class LittleBigLogic
 {
     public static final String MOD_ID = "lbl";
+
+    public static final ItemGroup LBL_ITEMGROUP = new ItemGroup("lbl_itemgroup") {
+        @Override
+        public ItemStack createIcon() {
+            return new ItemStack(ModItems.LOGIC_BOARD);
+        }
+    };
 
     public LittleBigLogic() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
