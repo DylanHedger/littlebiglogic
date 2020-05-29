@@ -1,4 +1,4 @@
-package com.example.examplemod;
+package me.hcdh.lbl;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -18,12 +18,11 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.stream.Collectors;
 
-@Mod("examplemod")
-public class ExampleMod
+@Mod("lbl")
+public class LittleBigLogic
 {
     private static final Logger LOGGER = LogManager.getLogger();
-
-    public ExampleMod() {
+    public LittleBigLogic() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
