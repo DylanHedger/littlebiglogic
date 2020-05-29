@@ -21,7 +21,8 @@ import java.util.stream.Collectors;
 @Mod("lbl")
 public class LittleBigLogic
 {
-    private static final Logger LOGGER = LogManager.getLogger();
+    public static final String MOD_ID = "lbl";
+
     public LittleBigLogic() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
@@ -29,6 +30,8 @@ public class LittleBigLogic
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::doClientStuff);
 
         MinecraftForge.EVENT_BUS.register(this);
+
+        RegistryHandler.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     private void setup(final FMLCommonSetupEvent event) {
