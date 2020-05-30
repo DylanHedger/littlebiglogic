@@ -1,4 +1,5 @@
 {
   "itemGroup.lbl_itemgroup" : "LittleBigLogic",
-  "item.lbl.logic_board": "Logic Board"
+  "item.lbl.logic_board": "Logic Board",
+  "item.lbl.logic_board_printer": "Logic Board Printer"
 }

@@ -46,10 +46,9 @@ public class LogicBoardItem extends Item {
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        CompoundNBT nbt;
         if (stack.hasTag())
         {
-            nbt = stack.getTag();
+            CompoundNBT nbt = stack.getTag();
 
             if(nbt.getBoolean("isCreated")) {
                 tooltip.add(new StringTextComponent("\u00A7r\u00A7c\u00A7lLogic Board Created"));
