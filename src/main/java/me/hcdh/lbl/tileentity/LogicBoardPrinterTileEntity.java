@@ -1,109 +1,79 @@
 package me.hcdh.lbl.tileentity;
 
+import me.hcdh.lbl.LittleBigLogic;
+import me.hcdh.lbl.containers.LogicBoardPrinterContainer;
+import me.hcdh.lbl.registries.ModTileEntityTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
-import net.minecraft.inventory.IRecipeHelperPopulator;
-import net.minecraft.inventory.IRecipeHolder;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.RecipeItemHelper;
 import net.minecraft.tileentity.ITickableTileEntity;
 import net.minecraft.tileentity.LockableTileEntity;
 import net.minecraft.tileentity.TileEntityType;
-import net.minecraft.util.Direction;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.TranslationTextComponent;
 
-import javax.annotation.Nullable;
+public class LogicBoardPrinterTileEntity extends LockableTileEntity implements ITickableTileEntity {
 
-public class LogicBoardPrinterTileEntity extends LockableTileEntity implements ISidedInventory, IRecipeHolder, IRecipeHelperPopulator, ITickableTileEntity {
+    private NonNullList<ItemStack> printerContents = NonNullList.withSize(1, ItemStack.EMPTY);
 
-    // TODO MAKE THIS AN ACTUAL TILE ENTITY THAT WHEN OPENED ITS CONTAINER HAS A TITLE AND ONE SLOT AT THE BOTTOM (THE SLOT CAN ONLY PUT IN LOGIC BOARDS THAT ARENT CREATED)
+    public LogicBoardPrinterTileEntity(final TileEntityType<?> typeIn) {
+        super(typeIn);
+    }
 
     public LogicBoardPrinterTileEntity() {
-        super(TileEntityType.FURNACE);
+        this(ModTileEntityTypes.LOGIC_BOARD_PRINTER.get());
     }
 
     protected ITextComponent getDefaultName() {
-        return new TranslationTextComponent("container.furnace");
+        return new TranslationTextComponent("container." + LittleBigLogic.MOD_ID + ".logic_board_printer");
     }
 
+    @Override
     protected Container createMenu(int id, PlayerInventory player) {
-        //return new FurnaceContainer(id, player, this, this.furnaceData);
-        return null;
-    }
-
-    @Override
-    public int[] getSlotsForFace(Direction side) {
-        return new int[0];
-    }
-
-    @Override
-    public boolean canInsertItem(int index, ItemStack itemStackIn, @Nullable Direction direction) {
-        return false;
-    }
-
-    @Override
-    public boolean canExtractItem(int index, ItemStack stack, Direction direction) {
-        return false;
+        return null; // Working on GUI -HauntedCorpse
+        // return new LogicBoardPrinterContainer(id, player, this);
     }
 
     @Override
     public int getSizeInventory() {
-        return 0;
+        return printerContents.size();
     }
 
     @Override
     public boolean isEmpty() {
-        return false;
+        return true;
     }
 
     @Override
     public ItemStack getStackInSlot(int index) {
-        return null;
+        return this.printerContents.get(index);
     }
 
     @Override
     public ItemStack decrStackSize(int index, int count) {
-        return null;
+        return this.printerContents.set(index, new ItemStack(printerContents.get(index).getItem(), count));
     }
 
     @Override
     public ItemStack removeStackFromSlot(int index) {
-        return null;
+        return this.printerContents.set(index, ItemStack.EMPTY);
     }
 
     @Override
     public void setInventorySlotContents(int index, ItemStack stack) {
-
+        this.printerContents.set(index, stack);
     }
 
     @Override
     public boolean isUsableByPlayer(PlayerEntity player) {
-        return false;
+        return true;
     }
 
     @Override
     public void clear() {
-
-    }
-
-    @Override
-    public void fillStackedContents(RecipeItemHelper helper) {
-
-    }
-
-    @Override
-    public void setRecipeUsed(@Nullable IRecipe<?> recipe) {
-
-    }
-
-    @Nullable
-    @Override
-    public IRecipe<?> getRecipeUsed() {
-        return null;
+        this.printerContents.clear();
     }
 
     @Override

@@ -1,38 +1,36 @@
 package me.hcdh.lbl;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import me.hcdh.lbl.client.gui.screens.LogicBoardPrinterScreen;
+import me.hcdh.lbl.registries.ModBlocks;
+import me.hcdh.lbl.registries.ModContainers;
+import me.hcdh.lbl.registries.ModItems;
+import me.hcdh.lbl.registries.ModTileEntityTypes;
+import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-
-import java.util.stream.Collectors;
 
 @Mod("lbl")
 public class LittleBigLogic
 {
     public static final String MOD_ID = "lbl";
 
-    public static final ItemGroup LBL_ITEMGROUP = new ItemGroup("lbl_itemgroup") {
+    public static final ItemGroup TAB = new ItemGroup("lbl_itemgroup") {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(ModItems.LOGIC_BOARD);
+            return new ItemStack(ModItems.LOGIC_BOARD.get());
         }
     };
 
     public LittleBigLogic() {
+        IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::enqueueIMC);
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::processIMC);
@@ -40,13 +38,17 @@ public class LittleBigLogic
 
         MinecraftForge.EVENT_BUS.register(this);
 
-        RegistryHandler.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ModBlocks.BLOCKS.register(modEventBus);
+        ModItems.ITEMS.register(modEventBus);
+        ModTileEntityTypes.TILE_ENTITIES.register(modEventBus);
+        ModContainers.CONTAINERS.register(modEventBus);
     }
 
     private void setup(final FMLCommonSetupEvent event) {
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
+        ScreenManager.registerFactory(ModContainers.LOGIC_BOARD_PRINTER.get(), LogicBoardPrinterScreen::new);
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {

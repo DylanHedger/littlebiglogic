@@ -1,0 +1,8 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "lbl:block/logic_board_printer_top",
+    "front": "lbl:block/logic_board_printer_front",
+    "side": "lbl:block/logic_board_printer_side"
+  }
+}

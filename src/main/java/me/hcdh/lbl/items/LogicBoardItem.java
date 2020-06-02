@@ -16,8 +16,9 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class LogicBoardItem extends Item {
+
     public LogicBoardItem() {
-        super((new Item.Properties()).maxStackSize(1).group(LittleBigLogic.LBL_ITEMGROUP));
+        super(new Item.Properties().maxStackSize(1).group(LittleBigLogic.TAB));
     }
 
     @Override

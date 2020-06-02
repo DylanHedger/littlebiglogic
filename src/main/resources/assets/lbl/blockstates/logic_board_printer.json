@@ -1,0 +1,8 @@
+{
+  "variants": {
+    "facing=north": { "model": "lbl:block/logic_board_printer" },
+    "facing=south": { "model": "lbl:block/logic_board_printer", "y": 180 },
+    "facing=west":  { "model": "lbl:block/logic_board_printer", "y": 270 },
+    "facing=east":  { "model": "lbl:block/logic_board_printer", "y": 90 }
+  }
+}
